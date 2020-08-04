@@ -1,0 +1,45 @@
+---
+title: "R Codes/Explaination"
+output: pdf_document
+---
+#wilcoxon Signed rank test for single sample the parameteric version for this one sample is t- test
+
+##Suppose that the mean weight of peanuts put in jars is required to be 8 oz.The observed weights for 16 jars are 8.08, 7.71, 7.89, 7.72, 8.00, 7.90, 7.77, 7.81, 8.33, 7.67, 7.79, 7.79, 7.94, 7.84, 8.17, and 7.87.
+##Here, we are interested in testing H0: m = 8.0
+
+Peanuts <- c(8.08, 7.71, 7.89, 7.72, 8.00, 
+             7.90,7.77, 7.81, 8.33, 7.67,
+             7.79, 7.79,7.94, 7.84, 8.17, 7.87)
+Peanuts
+summary(Peanuts)
+
+##we can visualise our data with boxplot
+boxplot(Peanuts)
+
+
+##Null Hypothesis -  H0: m = 8.0
+##alternative hypothesis - H1: m is not equal to 8.0
+wilcox.test(Peanuts,mu = 8)
+##Since the p-value is very small,
+##for the exact Wilcoxon test as well as for the large-sample approximation non-parametric test, 
+##we reject the hypothesis H0
+
+
+##Null Hypothesis -  H0: m = 8.0
+##alternative hypothesis - H1: m is not equal to 8.0
+wilcox.test(Peanuts,mu = 8,exact = FALSE,correct = FALSE)
+##Since the p-value is very small,
+##for the exact Wilcoxon test as well as for the large-sample approximation non-parametric test, 
+##we reject the hypothesis H0
+
+
+##Null Hypothesis -  H0: m <= 8.0
+##alternative hypothesis - H1: m >= 8.0
+wilcox.test(Peanuts,mu = 8,exact = FALSE,correct = FALSE,alternative = "greater")
+##Since p value >=0.5, we accept the null hypothesis that mean <=8
+
+
+##Null Hypothesis -  H0: m >= 8.0
+##alternative hypothesis - H1: m <= 8.0
+wilcox.test(Peanuts,mu = 8,exact = FALSE,correct = FALSE,alternative = "less")
+##Since p value <=0.5, we reject the null hypothesis 
